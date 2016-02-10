@@ -8,10 +8,11 @@ class App < Sinatra::Base
     username == ENV['SINATRA_USERNAME'] and password == ENV['SINATRA_PASSWORD']
   end
 
-  post '/bootstrap_chef_node' do
+  post '/bootstrap_chef_client' do
     begin
       data = JSON.parse request.body.read
-      system "cd ~/chef-repo && knife bootstrap #{data['ip_address']} -x root -A -P password --sudo --use-sudo-password -N #{data['name']}  -r 'recipe[bitcoin::source]'"
+      blockchain_flavor = data['blockchain_flavor']
+      system "cd ~/chef-repo && knife bootstrap #{data['ip_address']} -x root -A -P password --sudo --use-sudo-password -N #{data['name']}  -r 'recipe[bitcoin::#{blockchain_flavor}]'"
       system "cd ~/chef-repo && ssh root@#{data['ip_address']} 'sudo chef-client'"
     rescue Exception => error
       puts "Error: #{error}"
