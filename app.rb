@@ -18,4 +18,13 @@ class App < Sinatra::Base
       puts "Error: #{error}"
     end
   end
+
+  get '/confirm_client_bootstrapped'
+    begin
+      if system "cd ~/chef-repo && knife node show #{params['name']}"
+        puts "Yup, Chef Client #{params['name']} has been boostrapped"
+      end
+    rescue Exception => error
+    end
+  end
 end
