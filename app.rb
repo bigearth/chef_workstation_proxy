@@ -23,6 +23,10 @@ class App < Sinatra::Base
     begin
       if system "cd ~/chef-repo && knife node show #{params['name']}"
         puts "Yup, Chef Client #{params['name']} has been boostrapped"
+        @response = {
+          status: 200,
+          message: "Yup, Chef Client #{params['name']} has been boostrapped"
+        }
       end
     rescue Exception => error
     end
