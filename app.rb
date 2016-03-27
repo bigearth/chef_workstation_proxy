@@ -9,30 +9,30 @@ class App < Sinatra::Base
   config_file './config.yml'
   
   use Rack::Auth::Basic, "Restricted Area" do |username, password|
-    username == ENV['SINATRA_USERNAME'] and password == ENV['SINATRA_PASSWORD']
+    username == ENV['CHEF_WORKSTATION_USERNAME'] and password == ENV['CHEF_WORKSTATION_PASSWORD']
   end
 
   post '/bootstrap_chef_client' do
     begin
       data = JSON.parse request.body.read
       flavor = data['flavor']
-      system "cd ~/chef-repo && knife bootstrap #{data['ipv4_address']} -x root -A -P password --sudo --use-sudo-password -N #{data['title']}  -r 'recipe[bitcoin::#{flavor}]'"
+      system "cd ~/chef-repo && knife bootstrap #{data['ipv4_address']} -x root -A -P password --sudo --use-sudo-password -N #{data['title']} -r 'recipe[bitcoin::#{flavor}]'"
       system "cd ~/chef-repo && ssh root@#{data['ipv4_address']} 'sudo chef-client'"
-    rescue Exception => error
-      puts "Error: #{error}"
+    rescue => error
+      puts "[ERROR] #{Time.now}: #{error.class}: #{error.message}"
     end
   end
 
   get '/confirm_client_bootstrapped' do
     begin
-      # data={name:'justin-hughes-1'}
-      puts "Confirming that Chef Client #{data[:title]} has been boostrapped"
-      if "cd ~/chef-repo && knife node show #{params[:title]}"
-        { status: 200 }.to_json
+      puts "Confirming that Chef Client #{data['title']} has been boostrapped"
+      if "cd ~/chef-repo && knife node show #{params['title']}"
+        # Do Success Things
       else
-        { status: 204 }.to_json
+        # Do Error Things
       end
-    rescue Exception => error
+    rescue => error
+      puts "[ERROR] #{Time.now}: #{error.class}: #{error.message}"
     end
   end
 end
