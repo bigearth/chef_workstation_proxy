@@ -12,10 +12,11 @@
 /Gemfile.lock
 
 # Chef related
-chef-repo/.rake_test_cache
+chef_repo/.rake_test_cache
 
 ###
 # Ignore Chef key files and secrets
 ###
-~/.chef/*.pem
-~/.chef/encrypted_data_bag_secret
+.chef/*.pem
+.chef/encrypted_data_bag_secret
+.chef/trusted_certs
