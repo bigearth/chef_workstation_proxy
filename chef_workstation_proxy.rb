@@ -1,6 +1,5 @@
 module BigEarth
   module Blockchain
-    require 'sinatra'
     require 'sinatra/base'
     require "sinatra/config_file"
     require 'sinatra/json'
