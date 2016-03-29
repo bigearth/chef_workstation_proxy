@@ -1,6 +1,6 @@
-# Big Earth Blockchain Chef Workstation Proxy Recipe
+# Big Earth Blockchain Boostrap Node Generic Recipe
 
-To configure an Ubuntu instance for the Chef Workstation Proxy 
+To bring up and configure an Ubuntu instance for use in the Big Earth ecosystem
 
 ## Requirements
 
@@ -10,7 +10,7 @@ Ubuntu
 
 ### Cookbooks:
 
-* bootstrap_node_generic::default
+*No dependencies defined*
 
 ## Attributes
 

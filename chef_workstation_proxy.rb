@@ -21,7 +21,7 @@ module BigEarth
         begin
           data = JSON.parse request.body.read
           flavor = data['flavor']
-          system "cd ~/chef_workstation_proxy/chef_repo && knife bootstrap #{data['ipv4_address']} -x root -A -P password --sudo --use-sudo-password -N #{data['title']} -r 'recipe[bitcoin::bitcoin_#{flavor}]'"
+          system "cd ~/chef_workstation_proxy/chef_repo && knife bootstrap #{data['ipv4_address']} -x root -A -P password --sudo --use-sudo-password -N #{data['title']} -r 'recipe[bootstrap_node_generic]'"
           system "cd ~/chef_workstation_proxy/chef_repo && ssh root@#{data['ipv4_address']} 'sudo chef-client'"
         rescue => error
           puts "[ERROR] #{Time.now}: #{error.class}: #{error.message}"
