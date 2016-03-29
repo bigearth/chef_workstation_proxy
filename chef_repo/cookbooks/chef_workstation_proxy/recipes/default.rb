@@ -9,36 +9,108 @@
 
 execute "apt-get update" do
   command "apt-get update"
-  # command "apt-get update && apt-get -y upgrade && apt-get -y install tmux wget vim tree ack-grep ntp git build-essential libssl-dev libdb-dev libdb++-dev libboost-all-dev libqrencode-dev htop bundler zsh git-core tig unzip autoconf pkg-config makepasswd transmission-common transmission-daemon transmission-remote-cli && wget https://raw.githubusercontent.com/cgcardona/dotfiles/master/.vimrc"
 end
+
 execute "apt-get -y upgrade" do
   command "apt-get -y upgrade"
 end
+
 execute "apt-get -y install tmux" do
   command "apt-get -y install tmux"
 end
+
 execute "apt-get -y install vim" do
   command "apt-get -y install vim"
-  #command "apt-get -y install tree"
-  #command "apt-get -y install ack-grep"
-  #command "apt-get -y install ntp"
-  #command "apt-get -y install git"
-  #command "apt-get -y install build-essential"
-  #command "apt-get -y install libssl-dev"
-  #command "apt-get -y install libdb-dev"
-  #command "apt-get -y install libdb++-dev"
-  #command "apt-get -y install libboost-all-dev"
-  #command "apt-get -y install libqrencode-dev"
-  #command "apt-get -y install htop"
-  #command "apt-get -y install bundler"
-  #command "apt-get -y install zsh"
-  #command "apt-get -y install git-core"
-  #command "apt-get -y install tig"
-  #command "apt-get -y install unzip"
-  #command "apt-get -y install autoconf"
-  #command "apt-get -y install pkg-config"
-  #command "apt-get -y install makepasswd"
-  #command "apt-get -y install transmission-common"
-  #command "apt-get -y install transmission-daemon"
-  #command "apt-get -y install transmission-remote-cli"
+end
+
+execute "apt-get -y install tree" do
+  command "apt-get -y install tree"
+end
+
+execute "apt-get -y install ack-grep" do
+  command "apt-get -y install ack-grep"
+end
+
+execute "apt-get -y install ntp" do
+  command "apt-get -y install ntp"
+end
+
+execute "apt-get -y install git" do
+  command "apt-get -y install git"
+end
+
+execute "apt-get -y install build-essential" do
+  command "apt-get -y install build-essential"
+end
+
+execute "apt-get -y install libssl-dev" do
+  command "apt-get -y install libssl-dev"
+end
+
+execute "apt-get -y install libdb-dev" do
+  command "apt-get -y install libdb-dev"
+end
+
+execute "apt-get -y install libdb++-dev" do
+  command "apt-get -y install libdb++-dev"
+end
+
+execute "apt-get -y install libboost-all-dev" do
+  command "apt-get -y install libboost-all-dev"
+end
+
+execute "apt-get -y install libqrencode-dev" do
+  command "apt-get -y install libqrencode-dev"
+end
+
+execute "apt-get -y install htop" do
+  command "apt-get -y install htop"
+end
+
+execute "apt-get -y install bundler" do
+  command "apt-get -y install bundler"
+end
+
+execute "apt-get -y install zsh" do
+  command "apt-get -y install zsh"
+end
+
+execute "apt-get -y install git-core" do
+  command "apt-get -y install git-core"
+end
+
+execute "apt-get -y install tig" do
+  command "apt-get -y install tig"
+end
+
+execute "apt-get -y install unzip" do
+  command "apt-get -y install unzip"
+end
+
+execute "apt-get -y install autoconf" do
+  command "apt-get -y install autoconf"
+end
+
+execute "apt-get -y install pkg-config" do
+  command "apt-get -y install pkg-config"
+end
+
+execute "apt-get -y install makepasswd" do
+  command "apt-get -y install makepasswd"
+end
+
+execute "apt-get -y install transmission-common" do
+  command "apt-get -y install transmission-common"
+end
+
+execute "apt-get -y install transmission-daemon" do
+  command "apt-get -y install transmission-daemon"
+end
+
+execute "apt-get -y install transmission-remote-cli" do
+  command "apt-get -y install transmission-remote-cli"
+end
+
+template '/.vimrc' do
+  source 'vimrc.erb'
 end
