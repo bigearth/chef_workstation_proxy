@@ -21,14 +21,14 @@ module BigEarth
         begin
           data = JSON.parse request.body.read
           flavor = data['flavor']
-          system "cd ~/chef_workstation_proxy/chef_repo && knife bootstrap #{data['ipv4_address']} -x root -A -P password --sudo --use-sudo-password -N #{data['title']} -r 'recipe[chef_workstation_proxy]'"
+          system "cd ~/chef_workstation_proxy/chef_repo && knife bootstrap #{data['ipv4_address']} -x root -A -P password --sudo --use-sudo-password -N #{data['title'].tr(' ', '_')} -r 'recipe[chef_workstation_proxy]'"
           system "cd ~/chef_workstation_proxy/chef_repo && ssh root@#{data['ipv4_address']} 'sudo chef-client'"
         rescue => error
           puts "[ERROR] #{Time.now}: #{error.class}: #{error.message}"
         end
       end
 
-      get '/confirm_client_bootstrapped' do
+      get '/confirm_chef_client_bootstrapped' do
         begin
           data = JSON.parse request.body.read
           puts "Confirming that Chef Client #{data['title']} has been boostrapped"
