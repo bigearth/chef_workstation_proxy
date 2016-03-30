@@ -31,7 +31,7 @@ module BigEarth
       get '/confirm_chef_client_bootstrapped' do
         begin
           data = JSON.parse request.body.read
-          puts "Confirming that Chef Client #{data['title']} has been boostrapped"
+          puts "Confirming that Chef Client '#{data['title']}' has been boostrapped"
           if "cd ~/chef-repo && knife node show #{params['title']}"
             # Do Success Things
           else
