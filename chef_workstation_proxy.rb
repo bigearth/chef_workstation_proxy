@@ -1,9 +1,14 @@
+$LOAD_PATH.unshift File.dirname __FILE__
+# TODO: Is there a better way to add my lib/ directory to the $LOAD_PATH
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/lib/big_earth/blockchain"
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/lib/workers/big_earth/blockchain"
+require 'sinatra/base'
+require "sinatra/config_file"
+require 'sinatra/json'
+require 'json'
+require 'resque'
 module BigEarth
   module Blockchain
-    require 'sinatra/base'
-    require "sinatra/config_file"
-    require 'sinatra/json'
-    require 'json'
     class ChefWorkstationProxy < Sinatra::Base
 
       register Sinatra::ConfigFile
@@ -13,12 +18,18 @@ module BigEarth
         username == ENV['CHEF_WORKSTATION_PROXY_USERNAME'] and password == ENV['CHEF_WORKSTATION_PROXY_PASSWORD']
       end
       
+      get '/ping.json' do
+        require 'node'
+        content_type :json
+        knife_node = BigEarth::Blockchain::Knife::Node.new
+        { status: 'pong' }.to_json
+      end
+      
       post '/bootstrap_chef_client' do
+        require 'bootstrap_chef_client'
         begin
           data = JSON.parse request.body.read
-          flavor = data['flavor']
-          system "cd ~/chef_workstation_proxy/chef_repo && knife bootstrap #{data['ipv4_address']} -x root -A -P password --sudo --use-sudo-password -N #{data['title'].tr(' ', '_')} -r 'recipe[bootstrap_node_generic], recipe[bitcoin::bitcoin_#{flavor}]'"
-          system "cd ~/chef_workstation_proxy/chef_repo && ssh root@#{data['ipv4_address']} 'sudo chef-client'"
+          Resque.enqueue BigEarth::Blockchain::BootstrapChefClient, data
         rescue => error
           puts "[ERROR] #{Time.now}: #{error.class}: #{error.message}"
         end
