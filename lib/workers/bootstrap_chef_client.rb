@@ -6,13 +6,14 @@ module BigEarth
       @queue = '_bootstrap_chef_client_worker'
       
       def self.perform data
+        puts "DATA #{data}"
         require 'bootstrap'
         begin
           require 'node'
           node = BigEarth::Blockchain::Knife::Node.new
           puts node.list
-          bootstrap = BigEarth::Blockchain::Knife::Bootstrap.new data
-          bootstrap.bootstrap
+          bootstrap = BigEarth::Blockchain::Knife::Bootstrap.new
+          bootstrap.bootstrap data['config']['ipv4_address'], data['config']
           bootstrap.chef_client 
         rescue => error
             puts "[ERROR] #{Time.now}: #{error.class}: #{error.message}"

@@ -21,20 +21,21 @@ module BigEarth
         { status: 'pong' }.to_json
       end
       
-      post '/bootstrap_chef_client' do
+      post '/bootstrap_infrastructure' do
         require 'bootstrap_chef_client'
         begin
           data = JSON.parse request.body.read
+          # Bootstrap new chef client based on :options hash
           Resque.enqueue BigEarth::Blockchain::BootstrapChefClient, data
         rescue => error
           puts "[ERROR] #{Time.now}: #{error.class}: #{error.message}"
         end
       end
 
-      get '/confirm_chef_client_bootstrapped' do
+      get '/confirm_infrastructure_bootstrapped' do
         begin
           data = JSON.parse request.body.read
-          puts "Confirming that Chef Client '#{data['title']}' has been boostrapped"
+          puts "Confirming that infrastructure '#{data['config']['title']}' has been boostrapped"
           if "cd ~/chef-repo && knife node show #{params['title']}"
             # Do Success Things
           else

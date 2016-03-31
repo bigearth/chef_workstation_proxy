@@ -2,13 +2,10 @@ module BigEarth
   module Blockchain 
     module Knife 
       class Bootstrap
-        def initialize data
-          @data = data
-        end
-        
         def bootstrap fqdn = '', options = ''
-          flavor = @data['flavor']
-          system "cd #{ENV['CHEF_WORKSTATION_PROXY_CHEF_REPO_PATH']} && knife bootstrap #{@data['ipv4_address']} -x root -A -P password --sudo --use-sudo-password -N #{@data['title'].tr(' ', '_')} -r 'recipe[bootstrap_node_generic], recipe[bitcoin::bitcoin_#{flavor}]'"
+          puts "FQDN #{fqdn}, OPTIONS #{options}"
+          flavor = options['flavor']
+          system "cd #{ENV['CHEF_WORKSTATION_PROXY_CHEF_REPO_PATH']} && knife bootstrap #{fqdn} -x root -A -P password --sudo --use-sudo-password -N #{options['title'].tr(' ', '_')} -r 'recipe[bootstrap_node_generic], recipe[bitcoin::bitcoin_#{flavor}]'"
         end
         
         def bootstrap_windows_ssh fqdn = '', options = ''
