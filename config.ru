@@ -1,2 +1,2 @@
 require './chef_workstation_proxy'
-run ChefWorkstationProxy
+run BigEarth::Blockchain::ChefWorkstationProxy
