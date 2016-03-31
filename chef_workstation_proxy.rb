@@ -9,8 +9,7 @@ class ChefWorkstationProxy < Sinatra::Base
   config_file './config.yml'
   
   use Rack::Auth::Basic, "Restricted Area" do |username, password|
-    # username == ENV['CHEF_WORKSTATION_PROXY_USERNAME'] and password == ENV['CHEF_WORKSTATION_PROXY_PASSWORD']
-    username == 'a' and password == 'a' 
+    username == ENV['CHEF_WORKSTATION_PROXY_USERNAME'] and password == ENV['CHEF_WORKSTATION_PROXY_PASSWORD']
   end
   
   get '/' do
