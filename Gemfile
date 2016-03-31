@@ -7,3 +7,4 @@ gem 'unicorn'
 gem 'rake'
 gem 'simplecov', require: false, group: :test
 gem 'minitest-reporters'
+gem 'resque'

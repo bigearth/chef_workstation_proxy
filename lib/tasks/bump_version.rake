@@ -10,7 +10,7 @@ namespace :blockchain do
   end
   
   desc "Shows current version per Semantic Versioning (http://semver.org/)"
-  task show_version: :environment do |task, args|
+  task :show_version do |task, args|
     puts "Version: #{File.open("VERSION").read}"
   end
 end
