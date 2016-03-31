@@ -1,7 +1,5 @@
-$LOAD_PATH.unshift File.dirname __FILE__
-# TODO: Is there a better way to add my lib/ directory to the $LOAD_PATH
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/lib/workers"
 $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/lib/big_earth/blockchain"
-$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/lib/workers/big_earth/blockchain"
 require 'sinatra/base'
 require "sinatra/config_file"
 require 'sinatra/json'
@@ -15,13 +13,12 @@ module BigEarth
       config_file './config.yml'
       
       use Rack::Auth::Basic, "Restricted Area" do |username, password|
-        username == ENV['CHEF_WORKSTATION_PROXY_USERNAME'] and password == ENV['CHEF_WORKSTATION_PROXY_PASSWORD']
+        username == 'a' and password == 'a' 
+        # username == ENV['CHEF_WORKSTATION_PROXY_USERNAME'] and password == ENV['CHEF_WORKSTATION_PROXY_PASSWORD']
       end
       
       get '/ping.json' do
-        require 'node'
         content_type :json
-        knife_node = BigEarth::Blockchain::Knife::Node.new
         { status: 'pong' }.to_json
       end
       
