@@ -7,6 +7,7 @@ module BigEarth
       @queue = '_bootstrap_chef_client_worker'
 
       def self.perform data
+        require 'bootstrap'
         begin
           bootstrap = BigEarth::Blockchain::Knife::Bootstrap.new data
           bootstrap.bootstrap
