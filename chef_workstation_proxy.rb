@@ -12,8 +12,9 @@ class ChefWorkstationProxy < Sinatra::Base
     username == ENV['CHEF_WORKSTATION_PROXY_USERNAME'] and password == ENV['CHEF_WORKSTATION_PROXY_PASSWORD']
   end
   
-  get '/' do
-    Resque.enqueue TestWorker, 'foobar'
+  get '/ping.json' do
+    content_type :json
+    { status: 'pong' }.to_json
   end
   
   post '/bootstrap_chef_client' do
@@ -43,30 +44,31 @@ end
 class BootstrapChefClient
   
   # Set queue
-  @queue = "foobar_bootstrap_chef_client_worker"
+  # TODO set environment
+  @queue = '_bootstrap_chef_client_worker'
   
   def self.perform data
     begin
-      flavor = data['flavor']
-      system "cd ~/chef_workstation_proxy/chef_repo && knife bootstrap #{data['ipv4_address']} -x root -A -P password --sudo --use-sudo-password -N #{data['title'].tr(' ', '_')} -r 'recipe[bootstrap_node_generic], recipe[bitcoin::bitcoin_#{flavor}]'"
-      system "cd ~/chef_workstation_proxy/chef_repo && ssh root@#{data['ipv4_address']} 'sudo chef-client'"
+      knife = Knife.new data
+      knife.bootstrap
+      knife.chef_client 
     rescue => error
         puts "[ERROR] #{Time.now}: #{error.class}: #{error.message}"
     end
   end
 end
 
-
-class TestWorker
+class Knife
+  def initialize data
+    @data = data
+  end
   
-  # Set queue
-  @queue = "foobar_test_worker"
+  def bootstrap
+    flavor = @data['flavor']
+    system "cd ~/chef_workstation_proxy/chef_repo && knife bootstrap #{@data['ipv4_address']} -x root -A -P password --sudo --use-sudo-password -N #{@data['title'].tr(' ', '_')} -r 'recipe[bootstrap_node_generic], recipe[bitcoin::bitcoin_#{flavor}]'"
+  end
   
-  def self.perform data
-    begin
-      puts "DATA #{data}"
-    rescue => error
-        puts "[ERROR] #{Time.now}: #{error.class}: #{error.message}"
-    end
+  def chef_client 
+      system "cd ~/chef_workstation_proxy/chef_repo && ssh root@#{@data['ipv4_address']} 'sudo chef-client'"
   end
 end
