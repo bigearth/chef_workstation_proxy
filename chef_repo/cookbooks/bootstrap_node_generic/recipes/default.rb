@@ -17,13 +17,15 @@ user node['bootstrap_node_generic']['user'] do
   supports manage_home: true
 end
 
-# install dependencies
+# Install dependencies
 node['bootstrap_node_generic']['source']['dependencies'].each do |dependency|
-  package dependency do
-    action :upgrade
-  end
+  package dependency
+  # package dependency do
+  #   action :upgrade
+  # end
 end
 
+# Put .vimrc file in case I end up `ssh`ing in 
 template '/.vimrc' do
   source 'vimrc.erb'
 end
