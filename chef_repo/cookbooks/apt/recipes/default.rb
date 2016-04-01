@@ -2,37 +2,86 @@
 # Cookbook Name:: apt
 # Recipe:: default
 #
-# Copyright 2016, YOUR_COMPANY_NAME
+# Copyright 2008-2016, Chef Software, Inc.
+# Copyright 2009, Bryan McLellan <btm@loftninjas.org>
 #
-# All rights reserved - Do Not Redistribute
+# Licensed under the Apache License, Version 2.0 (the 'License');
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an 'AS IS' BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 #
 
-execute "apt-get update" do
-  command "apt-get update && apt-get -y upgrade && apt-get -y install tmux wget vim tree ack-grep ntp git build-essential libssl-dev libdb-dev libdb++-dev libboost-all-dev libqrencode-dev htop bundler zsh git-core tig unzip autoconf pkg-config makepasswd transmission-common transmission-daemon transmission-remote-cli && wget https://raw.githubusercontent.com/cgcardona/dotfiles/master/.vimrc"
-  #command "apt-get update"
-  #command "apt-get -y upgrade"
-  #command "apt-get -y install tmux"
-  #command "apt-get -y install vim"
-  #command "apt-get -y install tree"
-  #command "apt-get -y install ack-grep"
-  #command "apt-get -y install ntp"
-  #command "apt-get -y install git"
-  #command "apt-get -y install build-essential"
-  #command "apt-get -y install libssl-dev"
-  #command "apt-get -y install libdb-dev"
-  #command "apt-get -y install libdb++-dev"
-  #command "apt-get -y install libboost-all-dev"
-  #command "apt-get -y install libqrencode-dev"
-  #command "apt-get -y install htop"
-  #command "apt-get -y install bundler"
-  #command "apt-get -y install zsh"
-  #command "apt-get -y install git-core"
-  #command "apt-get -y install tig"
-  #command "apt-get -y install unzip"
-  #command "apt-get -y install autoconf"
-  #command "apt-get -y install pkg-config"
-  #command "apt-get -y install makepasswd"
-  #command "apt-get -y install transmission-common"
-  #command "apt-get -y install transmission-daemon"
-  #command "apt-get -y install transmission-remote-cli"
+# On systems where apt is not installed, the resources in this recipe are not
+# executed. However, they _must_ still be present in the resource collection
+# or other cookbooks which notify these resources will fail on non-apt-enabled
+# systems.
+
+file '/var/lib/apt/periodic/update-success-stamp' do
+  owner 'root'
+  group 'root'
+  action :nothing
+end
+
+# If compile_time_update run apt-get update at compile time
+if node['apt']['compile_time_update']
+  apt_update('compile time').run_action(:periodic)
+end
+
+apt_update 'periodic' do
+  only_if { apt_installed? }
+end
+
+# For other recipes to call to force an update
+execute 'apt-get update' do
+  command 'apt-get update'
+  ignore_failure true
+  action :nothing
+  notifies :touch, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
+  only_if { apt_installed? }
+end
+
+# Automatically remove packages that are no longer needed for dependencies
+execute 'apt-get autoremove' do
+  command 'apt-get -y autoremove'
+  environment(
+    'DEBIAN_FRONTEND' => 'noninteractive'
+  )
+  action :nothing
+  only_if { apt_installed? }
+end
+
+# Automatically remove .deb files for packages no longer on your system
+execute 'apt-get autoclean' do
+  command 'apt-get -y autoclean'
+  action :nothing
+  only_if { apt_installed? }
+end
+
+%w(/var/cache/local /var/cache/local/preseeding).each do |dirname|
+  directory dirname do
+    owner 'root'
+    group 'root'
+    mode '0755'
+    action :create
+    only_if { apt_installed? }
+  end
+end
+
+template '/etc/apt/apt.conf.d/10recommends' do
+  owner 'root'
+  group 'root'
+  mode '0644'
+  source '10recommends.erb'
+  only_if { apt_installed? }
+end
+
+package 'apt-transport-https' do
+  only_if { apt_installed? }
 end

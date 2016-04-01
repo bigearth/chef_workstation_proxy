@@ -2,7 +2,6 @@
 # Cookbook Name:: bitcoin
 # Recipe:: bitcoin_xt
 #
-include_recipe "apt"
 
 btc_home = "#{node['bitcoin']['source']['home']}/.bitcoin"
 btc_conf = "#{btc_home}/bitcoin.conf"
