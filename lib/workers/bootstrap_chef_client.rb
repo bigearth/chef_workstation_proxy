@@ -13,7 +13,7 @@ module BigEarth
           node = BigEarth::Blockchain::Knife::Node.new
           puts node.list
           bootstrap = BigEarth::Blockchain::Knife::Bootstrap.new
-          bootstrap.bootstrap config['options']['ipv4_address'], config['options']
+          bootstrap.bootstrap config['options']['ipv4_address'], config
           bootstrap.chef_client 
         rescue => error
             puts "[ERROR] #{Time.now}: #{error.class}: #{error.message}"
