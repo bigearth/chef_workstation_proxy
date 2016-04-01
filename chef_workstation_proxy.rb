@@ -26,6 +26,8 @@ module BigEarth
       post '/bootstrap_infrastructure' do
         # Bootstrap Blockchains/Chef Clients, Chef Workstations and/or Chef Servers for use in the Big Earth Blockchain Platform
         require 'bootstrap_chef_client'
+        require 'bootstrap_chef_server'
+        require 'bootstrap_chef_workstation'
         begin
           # Parse data into ruby hash
           data = JSON.parse request.body.read
