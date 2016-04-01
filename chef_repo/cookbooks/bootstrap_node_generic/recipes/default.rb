@@ -13,9 +13,7 @@ include_recipe 'apt'
 # add user
 user node['bootstrap_node_generic']['user'] do
   home node['bootstrap_node_generic']['source']['home']
-  # TODO  get zsh and oh-my-zsh working
-  #shell "/usr/bin/zsh"
-  shell "/bin/bash"
+  shell "/usr/bin/zsh"
   supports manage_home: true
 end
 
