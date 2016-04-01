@@ -1,3 +1,4 @@
+require 'utility'
 module BigEarth
   module Blockchain 
     class BootstrapChefServer
