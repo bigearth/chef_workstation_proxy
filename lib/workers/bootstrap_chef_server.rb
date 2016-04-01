@@ -1,8 +1,9 @@
 require 'utility'
+
 module BigEarth
   module Blockchain 
     class BootstrapChefServer
-      include BigEarth::Blockchain::Utility
+      extend BigEarth::Blockchain::Utility
       
       # TODO set environment
       # Set queue

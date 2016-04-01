@@ -3,6 +3,8 @@ require 'resque/tasks'
 require 'bootstrap_chef_client'
 require 'bootstrap_chef_server'
 require 'bootstrap_chef_workstation'
+require 'cookbook'
+require 'utility'
 
 # require 'rake/testtask'
 Dir.glob('lib/tasks/*.rake').each { |r| load r}
