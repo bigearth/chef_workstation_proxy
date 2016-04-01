@@ -9,11 +9,10 @@ module BigEarth
         
         # upload the latest and greatest of each cookbook to chef-server
         recipes.each do |recipe|
-          puts "RECIPE #{recipe}"
           berkshelf = BigEarth::Blockchain::Berkshelf.new
-          puts "Berkshelf: #{berkshelf}"
+          puts "Berkshire Installing #{recipe}"
           berkshelf.install if File.file? "#{ENV['CHEF_WORKSTATION_PROXY_CHEF_REPO_PATH']}/cookbooks/#{recipe}" 
-          berkshelf.upload('-b /.Berksfile') if File.file? '/.Berksfile' 
+          berkshelf.upload('-b /.Berksfile --ssl-verify=false') if File.file? '/.Berksfile' 
           cookbook.upload recipe 
         end
       end
