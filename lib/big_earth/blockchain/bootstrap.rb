@@ -15,8 +15,8 @@ module BigEarth
         end
         
         # TODO move chef_client from this class
-        def chef_client 
-          system "cd ~/chef_workstation_proxy/chef_repo && ssh root@#{@data['ipv4_address']} 'sudo chef-client'"
+        def chef_client fqdn = ''
+          system "cd ~/chef_workstation_proxy/chef_repo && ssh root@#{fqdn} 'sudo chef-client'"
         end
       end
     end
