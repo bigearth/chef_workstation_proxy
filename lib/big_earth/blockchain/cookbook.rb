@@ -39,7 +39,7 @@ module BigEarth
         end
         
         def upload cookbooks = '', options = ''
-          system "cd #{ENV['CHEF_WORKSTATION_PROXY_CHEF_REPO_PATH']} && knife cookbook test #{cookbooks} #{options}"
+          system "cd #{ENV['CHEF_WORKSTATION_PROXY_CHEF_REPO_PATH']} && knife cookbook upload #{cookbooks} #{options}"
         end
       end
     end
