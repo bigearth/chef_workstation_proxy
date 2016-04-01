@@ -1,7 +1,7 @@
 module BigEarth 
   module Blockchain 
     module Knife 
-      class Coookbook
+      class Cookbook
         def bulk_delete regex = '', options = ''
           system "cd #{ENV['CHEF_WORKSTATION_PROXY_CHEF_REPO_PATH']} && knife cookbook bulk delete #{regex} #{options}"
         end
