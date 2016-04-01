@@ -3,7 +3,6 @@ module BigEarth
     module Knife 
       class Bootstrap
         def bootstrap fqdn = '', options = ''
-          flavor = config['options']['flavor']
           system "cd #{ENV['CHEF_WORKSTATION_PROXY_CHEF_REPO_PATH']} && knife bootstrap #{fqdn} #{options}"
         end
         
