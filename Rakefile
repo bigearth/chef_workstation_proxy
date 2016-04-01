@@ -3,7 +3,7 @@ require 'resque/tasks'
 require 'bootstrap_chef_client'
 
 # require 'rake/testtask'
-# Dir.glob('lib/tasks/*.rake').each { |r| load r}
+Dir.glob('lib/tasks/*.rake').each { |r| load r}
 # Rake::TestTask.new do |t|
 #   t.libs << "test"
 #   t.test_files = FileList['test/test*.rb']
