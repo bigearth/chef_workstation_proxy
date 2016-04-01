@@ -13,6 +13,8 @@ module BigEarth
       config_file './config.yml'
       
       use Rack::Auth::Basic, "Restricted Area" do |username, password|
+        # Use a *very* strong user/pass
+        # TODO: Consider more robust solution than Basic HTTP Auth
         username == ENV['CHEF_WORKSTATION_PROXY_USERNAME'] and password == ENV['CHEF_WORKSTATION_PROXY_PASSWORD']
       end
       
@@ -22,11 +24,24 @@ module BigEarth
       end
       
       post '/bootstrap_infrastructure' do
+        # Bootstrap Blockchains/Chef Clients, Chef Workstations and/or Chef Servers for use in the Big Earth Blockchain Platform
         require 'bootstrap_chef_client'
         begin
+          # Parse data into ruby hash
           data = JSON.parse request.body.read
+          config = data['config']
+          
           # Bootstrap new chef client based on :options hash
-          Resque.enqueue BigEarth::Blockchain::BootstrapChefClient, data
+          if config['type'] == 'blockchain'
+            # Blockchains
+            Resque.enqueue BigEarth::Blockchain::BootstrapChefClient, config
+          elsif config['type'] == 'chef_workstation'
+            # Chef Workstations
+            Resque.enqueue BigEarth::Blockchain::BootstrapChefWorkstation, config
+          elsif config['type'] == 'chef_server'
+            # Chef Servers
+            Resque.enqueue BigEarth::Blockchain::BootstrapChefServer, config
+          end
         rescue => error
           puts "[ERROR] #{Time.now}: #{error.class}: #{error.message}"
         end

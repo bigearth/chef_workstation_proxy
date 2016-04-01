@@ -1,9 +1,9 @@
 module BigEarth
   module Blockchain 
-    class BootstrapChefClient
+    class BootstrapChefWorkstation
       # Set queue
       # TODO set environment
-      @queue = '_bootstrap_chef_client_worker'
+      @queue = '_bootstrap_chef_workstation_worker'
       
       def self.perform config 
         puts "DATA #{config}"
