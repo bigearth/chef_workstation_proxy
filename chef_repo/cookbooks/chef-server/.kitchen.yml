@@ -1,0 +1,53 @@
+driver:
+  name: vagrant
+  customize:
+    memory: 1024
+    cpus: 2
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: centos-6.7
+  - name: centos-7.1
+  - name: ubuntu-12.04
+    run_list:
+      - recipe[apt::default]
+  - name: ubuntu-14.04
+    run_list:
+      - recipe[apt::default]
+
+suites:
+- name: default
+  run_list:
+  - recipe[test]
+  - recipe[chef-server]
+  - recipe[test::post-install]
+  attributes:
+    chef-server:
+      api_fqdn: 'chef-server-tk.example.com'
+
+- name: no-fqdn
+  run_list:
+  - recipe[test]
+  - recipe[chef-server]
+  driver:
+    network:
+      - ['private_network', {ip: '192.168.243.2'}]
+  attributes:
+    chef-server:
+      api_fqdn: ''
+
+- name: add-ons-no-fqdn
+  run_list:
+  - recipe[test]
+  - recipe[chef-server]
+  - recipe[chef-server::addons]
+  driver:
+    network:
+      - ['private_network', {ip: '192.168.243.3'}]
+  attributes:
+    chef-server:
+      api_fqdn: ''
+      addons:
+        - manage
