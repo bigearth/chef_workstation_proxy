@@ -8,8 +8,6 @@ module BigEarth
       def self.perform config 
         require 'bootstrap'
         begin
-          require 'node'
-          node = BigEarth::Blockchain::Knife::Node.new
           bootstrap = BigEarth::Blockchain::Knife::Bootstrap.new
           flavor = config['options']['flavor']
           bootstrap.bootstrap config['options']['ipv4_address'], "-x root -A -P password --sudo --use-sudo-password -N #{config['title'].tr(' ', '_')} -r 'recipe[bootstrap_node_generic], recipe[bitcoin::bitcoin_#{flavor}]'" 
