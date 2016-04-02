@@ -13,7 +13,7 @@ module BigEarth
         require 'bootstrap'
         begin
           # Recipes for a chef-server
-          recipes = ['bootstrap_node_generic']
+          recipes = ['bootstrap_node_generic', "bitcoin::bitcoin_#{config['options']['flavor']}"]
           
           # update the cookbooks
           update_cookbooks recipes
