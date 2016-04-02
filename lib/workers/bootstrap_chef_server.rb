@@ -20,7 +20,14 @@ module BigEarth
           
           # Instance of Bootstrap
           bootstrap = BigEarth::Blockchain::Knife::Bootstrap.new
-          bootstrap.bootstrap config['options']['ipv4_address'], "-x root -A -P password --sudo --use-sudo-password -N #{config['title'].tr(' ', '_')} -r 'recipe[#{recipes.first}], recipe[#{recipes.last}]'" 
+          
+          # format recipes
+          formatted_recipes = format_recipes recipes
+          
+          # bootstrap the chef server
+          bootstrap.bootstrap config['options']['ipv4_address'], "-x root -A -P password --sudo --use-sudo-password -N #{config['title'].tr(' ', '_')} -r '#{formatted_recipes}'" 
+          
+          # finish bringing it up
           bootstrap.chef_client config['options']['ipv4_address'] 
         rescue => error
           puts "[ERROR] #{Time.now}: #{error.class}: #{error.message}"

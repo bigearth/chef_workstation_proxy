@@ -16,6 +16,13 @@ module BigEarth
           cookbook.upload recipe 
         end
       end
+      
+      def format_recipes recipes
+        formatted_recipes = recipes.map do |recipe|
+          "recipe[#{recipe}]"
+        end
+        formatted_recipes.join ', '
+      end
     end
   end
 end
