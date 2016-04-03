@@ -12,14 +12,17 @@ module BigEarth
       def self.perform config 
         require 'bootstrap'
         begin
+          # Recipes for a generic chef-client
+          recipes = ['bootstrap_node_generic']
+          
           # update the cookbooks
-          update_cookbooks ['bootstrap_node_generic', 'bitcoin']
+          update_cookbooks recipes
           
           # Instance of Bootstrap
           bootstrap = BigEarth::Blockchain::Knife::Bootstrap.new
           
           # format recipes
-          formatted_recipes = format_recipes ['bootstrap_node_generic', "bitcoin::bitcoin_#{config['options']['flavor']}"]
+          formatted_recipes = format_recipes recipes
           
           # bootstrap the chef server
           bootstrap.bootstrap config['options']['ipv4_address'], "-x root -A -P password --sudo --use-sudo-password -N #{config['title'].tr(' ', '_')} -r '#{formatted_recipes}'" 
