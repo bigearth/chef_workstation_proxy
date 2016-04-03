@@ -12,7 +12,7 @@ module BigEarth
           berkshelf = BigEarth::Blockchain::Berkshelf.new
           puts "Berkshire Installing #{recipe}"
           berkshelf.install if File.file? "#{ENV['CHEF_WORKSTATION_PROXY_CHEF_REPO_PATH']}/cookbooks/#{recipe}" 
-          berkshelf.upload('-b /.Berksfile --ssl-verify=false') if File.file? '/.Berksfile' 
+          berkshelf.upload('-b /.Berksfile --ssl-verify=false') if File.file? '/.Berksfile.lock' 
           cookbook.upload recipe 
         end
       end
