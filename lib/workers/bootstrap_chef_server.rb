@@ -1,22 +1,36 @@
+require 'utility'
+
 module BigEarth
   module Blockchain 
     class BootstrapChefServer
-      # Set queue
+      extend BigEarth::Blockchain::Utility
+      
       # TODO set environment
+      # Set queue
       @queue = '_bootstrap_chef_server_worker'
       
       def self.perform config 
-        puts "DATA #{config}"
         require 'bootstrap'
         begin
-          require 'node'
-          node = BigEarth::Blockchain::Knife::Node.new
-          puts node.list
+          # Recipes for a chef-server
+          recipes = ['bootstrap_node_generic', 'chef-server']
+          
+          # update the cookbooks
+          update_cookbooks recipes
+          
+          # Instance of Bootstrap
           bootstrap = BigEarth::Blockchain::Knife::Bootstrap.new
-          bootstrap.bootstrap config['options']['ipv4_address'], config['options']
-          bootstrap.chef_client 
+          
+          # format recipes
+          formatted_recipes = format_recipes recipes
+          
+          # bootstrap the chef server
+          bootstrap.bootstrap config['options']['ipv4_address'], "-x root -A -P password --sudo --use-sudo-password -N #{config['title'].tr(' ', '_')} -r '#{formatted_recipes}'" 
+          
+          # finish bringing it up
+          bootstrap.chef_client config['options']['ipv4_address'] 
         rescue => error
-            puts "[ERROR] #{Time.now}: #{error.class}: #{error.message}"
+          puts "[ERROR] #{Time.now}: #{error.class}: #{error.message}"
         end
       end
     end
