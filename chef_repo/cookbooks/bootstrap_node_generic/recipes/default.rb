@@ -70,16 +70,16 @@ template '/etc/issue.net' do
   source 'issue.net.erb'
 end
 
-service "ssh" do
-  action [:restart]
-end
-
 users_manage "sysadmin" do
    action [ :remove, :create ]
 end
 
 #node.default['authorization']['sudo']['passwordless'] = true
 include_recipe "sudo"
+
+service "ssh" do
+  action [:restart]
+end
 
 # reboot 'reboot the machine' do
 #   action :request_reboot
