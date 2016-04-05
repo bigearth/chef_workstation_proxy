@@ -35,7 +35,7 @@ template '/etc/ssh/sshd_config' do
   source 'sshd_config.erb'
 end
 
-service "httpd" do
+service "ssh" do
   action [:restart]
 end
 
