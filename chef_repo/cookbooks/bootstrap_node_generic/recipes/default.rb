@@ -43,7 +43,9 @@ service "ssh" do
   action [:restart]
 end
 
-execute "reboot" do
+reboot 'reboot the machine' do
+  action :request_reboot
+  reason 'Need to reboot when the run completes successfully.'
 end
 
 # require 'digest/sha2'
