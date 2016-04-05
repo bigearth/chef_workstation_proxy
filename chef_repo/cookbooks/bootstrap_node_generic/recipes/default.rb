@@ -10,19 +10,6 @@
 # Run apt-get update
 include_recipe 'apt'
 
-require 'digest/sha2'
-password = "pass@123"
-salt = rand(36**8).to_s(36)
-shadow_hash = password.crypt("$6$" + salt)
-# add user
-user node['bootstrap_node_generic']['user'] do
-  home node['bootstrap_node_generic']['source']['home']
-  password shadow_hash
-  # shell "/usr/bin/zsh"
-  shell "/bin/bash"
-  supports manage_home: true
-end
-
 # Install dependencies
 node['bootstrap_node_generic']['source']['dependencies'].each do |dependency|
   package dependency
@@ -34,4 +21,31 @@ end
 # Put .vimrc file in case I end up `ssh`ing in 
 template '/.vimrc' do
   source 'vimrc.erb'
+end
+
+# Change `nano` to `vim` 
+execute "sudo update-alternatives --set editor /usr/bin/vim.basic" do
+end
+
+template '/etc/adduser.conf' do
+  source 'adduser.conf.erb'
+end
+
+template '/etc/ssh/sshd_config' do
+  source 'sshd_config.erb'
+end
+
+service "httpd" do
+  action [:restart]
+end
+
+require 'digest/sha2'
+password = "pass@123"
+salt = rand(36**8).to_s(36)
+shadow_hash = password.crypt("$6$" + salt)
+# add user
+user node['bootstrap_node_generic']['user'] do
+  home node['bootstrap_node_generic']['source']['home']
+  password shadow_hash
+  supports manage_home: true
 end
