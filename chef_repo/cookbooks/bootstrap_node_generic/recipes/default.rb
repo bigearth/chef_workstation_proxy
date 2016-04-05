@@ -43,6 +43,9 @@ service "ssh" do
   action [:restart]
 end
 
+execute "reboot" do
+end
+
 # require 'digest/sha2'
 # password = "pass@123"
 # salt = rand(36**8).to_s(36)
