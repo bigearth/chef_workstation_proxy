@@ -13,15 +13,24 @@ include_recipe 'apt'
 # Install dependencies
 node['bootstrap_node_generic']['source']['dependencies'].each do |dependency|
   package dependency
+  
+  # Run apt-get upgrade
   # package dependency do
   #   action :upgrade
   # end
 end
 
-# Put .vimrc file in case I end up `ssh`ing in 
+# Add .vimrc file for root 
 template '/.vimrc' do
   source 'vimrc.erb'
 end
+
+# Add .vimrc file for users
+template '/etc/skel/.vimrc' do
+  source 'vimrc.erb'
+end
+
+# Add .z files for user
 
 # Change `nano` to `vim` 
 execute "sudo update-alternatives --set editor /usr/bin/vim.basic" do
