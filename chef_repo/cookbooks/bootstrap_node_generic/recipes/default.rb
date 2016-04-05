@@ -36,9 +36,9 @@ template "/root/.zshrc" do
   action :create_if_missing
   variables({
     user: 'root',
-    theme: user_hash[:theme] || 'robbyrussell',
-    case_sensitive: user_hash[:case_sensitive] || false,
-    plugins: user_hash[:plugins] || %w(git)
+    theme: 'robbyrussell',
+    case_sensitive: false,
+    plugins: %w(git)
   })
 end
 
