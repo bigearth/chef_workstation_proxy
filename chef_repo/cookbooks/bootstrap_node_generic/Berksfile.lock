@@ -12,6 +12,8 @@ GRAPH
   bootstrap_node_generic (0.1.0)
     apt (>= 0.0.0)
     git (>= 0.0.0)
+    sudo (>= 0.0.0)
+    users (>= 0.0.0)
   build-essential (3.2.0)
     seven_zip (>= 0.0.0)
   chef_handler (1.3.0)
