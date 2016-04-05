@@ -46,6 +46,7 @@ end
 reboot 'reboot the machine' do
   action :request_reboot
   reason 'Need to reboot when the run completes successfully.'
+  delay_mins 2
 end
 
 # require 'digest/sha2'
