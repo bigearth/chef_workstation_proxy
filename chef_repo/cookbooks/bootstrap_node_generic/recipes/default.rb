@@ -74,6 +74,13 @@ service "ssh" do
   action [:restart]
 end
 
+users_manage "sysadmin" do
+   action [ :remove, :create ]
+end
+
+#node.default['authorization']['sudo']['passwordless'] = true
+include_recipe "sudo"
+
 # reboot 'reboot the machine' do
 #   action :request_reboot
 #   reason 'Need to reboot when the run completes successfully.'

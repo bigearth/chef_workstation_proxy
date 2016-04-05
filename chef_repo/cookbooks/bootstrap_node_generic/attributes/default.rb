@@ -1,4 +1,4 @@
-default['bootstrap_node_generic']['user'] = 'big_earth'
+default['bootstrap_node_generic']['user'] = "#{ENV['CHEF_WORKSTATION_PROXY_NODE_BOOTSTRAP_GENERIC_USER']}"
 default['bootstrap_node_generic']['source']['home'] = "/home/#{node['bootstrap_node_generic']['user']}"
 default['bootstrap_node_generic']['source']['dependencies'] = [
   'build-essential', 'autoconf', 'libssl-dev', 'libboost-dev', 'pkg-config',
