@@ -7,3 +7,5 @@ default['bootstrap_node_generic']['source']['dependencies'] = [
   'tmux', 'vim', 'tree', 'ack-grep', 'ntp', 'git', 'libdb-dev', 'libdb++-dev', 'libboost-all-dev',
   'libqrencode-dev', 'htop', 'bundler', 'zsh', 'git-core', 'tig', 'unzip', 'makepasswd',
   'transmission-common', 'transmission-daemon', 'transmission-remote-cli']
+default['bootstrap_node_generic'][:users] = []
+default['bootstrap_node_generic'][:repository] = "git://github.com/robbyrussell/oh-my-zsh.git"

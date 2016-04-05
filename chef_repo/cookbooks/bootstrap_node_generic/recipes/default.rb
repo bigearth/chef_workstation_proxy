@@ -20,6 +20,28 @@ node['bootstrap_node_generic']['source']['dependencies'].each do |dependency|
   # end
 end
 
+include_recipe "git"
+
+git "/root/.oh-my-zsh" do
+  repository node['bootstrap_node_generic'][:repository]
+  user 'root'
+  reference "master"
+  action :sync
+end
+
+template "/root/.zshrc" do
+  source "zshrc.erb"
+  owner 'root'
+  mode "644"
+  action :create_if_missing
+  variables({
+    user: 'root',
+    theme: user_hash[:theme] || 'robbyrussell',
+    case_sensitive: user_hash[:case_sensitive] || false,
+    plugins: user_hash[:plugins] || %w(git)
+  })
+end
+
 # Add .vimrc file for root 
 template '/.vimrc' do
   source 'vimrc.erb'

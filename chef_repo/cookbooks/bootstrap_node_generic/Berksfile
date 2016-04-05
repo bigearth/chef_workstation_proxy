@@ -2,5 +2,5 @@ source "https://supermarket.chef.io"
 
 metadata
 
-cookbook 'sudo', '~> 2.9.0'
-
+cookbook 'apt'
+cookbook 'git'
