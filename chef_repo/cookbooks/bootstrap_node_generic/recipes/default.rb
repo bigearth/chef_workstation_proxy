@@ -35,6 +35,10 @@ template '/etc/ssh/sshd_config' do
   source 'sshd_config.erb'
 end
 
+template '/etc/issue.net' do
+  source 'issue.net.erb'
+end
+
 service "ssh" do
   action [:restart]
 end

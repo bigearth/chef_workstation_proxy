@@ -16,7 +16,7 @@ module BigEarth
           recipes = ['bootstrap_node_generic']
           
           # update the cookbooks
-          update_cookbooks recipes
+          # update_cookbooks recipes
           
           # Instance of Bootstrap
           bootstrap = BigEarth::Blockchain::Knife::Bootstrap.new
