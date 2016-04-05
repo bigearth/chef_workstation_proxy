@@ -58,10 +58,13 @@ end
 execute "sudo update-alternatives --set editor /usr/bin/vim.basic" do
 end
 
+# Update adduser.conf to change DSHELL
 template '/etc/adduser.conf' do
   source 'adduser.conf.erb'
 end
 
+# Update sshd_config to change
+# TODO Update docs here
 template '/etc/ssh/sshd_config' do
   source 'sshd_config.erb'
 end
@@ -71,10 +74,10 @@ template '/etc/issue.net' do
 end
 
 users_manage "sysadmin" do
-   action [ :remove, :create ]
+  action [ :remove, :create ]
 end
 
-#node.default['authorization']['sudo']['passwordless'] = true
+node.default['authorization']['sudo']['passwordless'] = true
 include_recipe "sudo"
 
 service "ssh" do
@@ -85,15 +88,4 @@ end
 #   action :request_reboot
 #   reason 'Need to reboot when the run completes successfully.'
 #   delay_mins 2
-# end
-
-# require 'digest/sha2'
-# password = "pass@123"
-# salt = rand(36**8).to_s(36)
-# shadow_hash = password.crypt("$6$" + salt)
-# # add user
-# user node['bootstrap_node_generic']['user'] do
-#   home node['bootstrap_node_generic']['source']['home']
-#   password shadow_hash
-#   supports manage_home: true
 # end
