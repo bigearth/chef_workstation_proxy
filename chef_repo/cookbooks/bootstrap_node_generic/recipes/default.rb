@@ -39,13 +39,13 @@ service "httpd" do
   action [:restart]
 end
 
-require 'digest/sha2'
-password = "pass@123"
-salt = rand(36**8).to_s(36)
-shadow_hash = password.crypt("$6$" + salt)
-# add user
-user node['bootstrap_node_generic']['user'] do
-  home node['bootstrap_node_generic']['source']['home']
-  password shadow_hash
-  supports manage_home: true
-end
+# require 'digest/sha2'
+# password = "pass@123"
+# salt = rand(36**8).to_s(36)
+# shadow_hash = password.crypt("$6$" + salt)
+# # add user
+# user node['bootstrap_node_generic']['user'] do
+#   home node['bootstrap_node_generic']['source']['home']
+#   password shadow_hash
+#   supports manage_home: true
+# end
