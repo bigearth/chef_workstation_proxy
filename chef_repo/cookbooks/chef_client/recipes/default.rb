@@ -49,6 +49,14 @@ template '/etc/issue.net' do
   source 'issue.net.erb'
 end
 
+template '/etc/update-motd.d/10-help-text' do
+  source '10-help-text.erb'
+end
+
+template '/etc/landscape/client.conf' do
+  source 'landscape_client.conf.erb'
+end
+
 users_manage "sysadmin" do
   action [ :remove, :create ]
 end
