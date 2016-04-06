@@ -30,8 +30,6 @@ template '/etc/skel/.vimrc' do
   source 'vimrc.erb'
 end
 
-# Add .z files for user
-
 # Change `nano` to `vim` 
 execute "sudo update-alternatives --set editor /usr/bin/vim.basic" do
 end
