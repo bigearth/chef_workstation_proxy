@@ -13,7 +13,7 @@ module BigEarth
         require 'bootstrap'
         begin
           # Recipes for a chef-server
-          recipes = ['bootstrap_node_generic', 'chef-server']
+          recipes = ['chef_client', 'chef-server']
           
           # update the cookbooks
           update_cookbooks recipes

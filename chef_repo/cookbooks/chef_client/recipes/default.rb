@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: bootstrap_node_generic
+# Cookbook Name:: chef_client
 # Recipe:: default
 #
 # Copyright 2016, Gabriel Cardona
@@ -11,7 +11,7 @@
 include_recipe 'apt'
 
 # Install dependencies
-node['bootstrap_node_generic']['source']['dependencies'].each do |dependency|
+node['chef_client']['source']['dependencies'].each do |dependency|
   package dependency
   
   # Run apt-get upgrade

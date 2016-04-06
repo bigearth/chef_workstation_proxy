@@ -84,7 +84,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     }
 
     chef.run_list = [
-      'recipe[bootstrap_node_generic::default]'
+      'recipe[chef_client::default]'
     ]
   end
 end

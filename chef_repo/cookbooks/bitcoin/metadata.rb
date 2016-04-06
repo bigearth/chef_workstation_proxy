@@ -6,7 +6,7 @@ description      'Installs/Configures the official Bitcoin Core'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '1.2.2'
 
-depends "bootstrap_node_generic"
+depends "chef_client"
 
 supports 'centos'
 supports 'debian'

@@ -1,4 +1,4 @@
-name             'bootstrap_node_generic'
+name             'chef_client'
 maintainer       'Gabriel Cardona'
 maintainer_email 'gabr13l@bigearth.io'
 license          'GPL v2'

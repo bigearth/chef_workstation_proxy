@@ -10,7 +10,7 @@ Ubuntu
 
 ### Cookbooks:
 
-* bootstrap_node_generic::default
+* chef_client::default
 
 ## Attributes
 
