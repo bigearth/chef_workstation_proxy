@@ -1,4 +1,4 @@
-# Big Earth Blockchain Boostrap Node Generic Recipe
+# Big Earth Blockchain Chef Client Recipe
 
 To bring up and configure an Ubuntu instance for use in the Big Earth ecosystem
 

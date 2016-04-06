@@ -1,0 +1,44 @@
+DEPENDENCIES
+  apt
+  chef_client
+    path: .
+    metadata: true
+  git
+  oh-my-zsh
+  sudo
+  users
+
+GRAPH
+  apt (3.0.0)
+  chef_client (0.1.0)
+    apt (>= 0.0.0)
+    git (>= 0.0.0)
+    sudo (>= 0.0.0)
+    users (>= 0.0.0)
+  build-essential (3.2.0)
+    seven_zip (>= 0.0.0)
+  chef_handler (1.3.0)
+  compat_resource (12.9.1)
+  dmg (2.3.0)
+  git (4.4.1)
+    build-essential (>= 0.0.0)
+    dmg (>= 0.0.0)
+    windows (>= 0.0.0)
+    yum-epel (>= 0.0.0)
+  multipackage (3.0.28)
+    compat_resource (>= 0.0.0)
+  oh-my-zsh (0.4.4)
+    git (>= 0.0.0)
+    users (>= 0.0.0)
+    zsh (>= 0.0.0)
+  seven_zip (2.0.0)
+    windows (>= 1.2.2)
+  sudo (2.9.0)
+  users (2.0.3)
+  windows (1.39.2)
+    chef_handler (>= 0.0.0)
+  yum (3.10.0)
+  yum-epel (0.6.6)
+    yum (~> 3.10.0)
+  zsh (2.0.0)
+    multipackage (~> 3.0)

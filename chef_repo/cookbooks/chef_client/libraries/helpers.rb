@@ -1,4 +1,4 @@
-module BootstrapNodeGenericCookbook
+module ChefClientCookbook
   module Helpers
     def password_shadow_hash
       require 'digest/sha2'

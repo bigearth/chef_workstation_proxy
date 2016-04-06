@@ -1,6 +1,5 @@
-default['bootstrap_node_generic']['user'] = 'big_earth'
-default['bootstrap_node_generic']['source']['home'] = "/home/#{node['bootstrap_node_generic']['user']}"
-default['bootstrap_node_generic']['source']['dependencies'] = [
+default['chef_client']['source']['home'] = "/home/#{node['chef_client']['user']}"
+default['chef_client']['source']['dependencies'] = [
   'build-essential', 'autoconf', 'libssl-dev', 'libboost-dev', 'pkg-config',
   'libboost-chrono-dev', 'libboost-filesystem-dev', 'libboost-program-options-dev',
   'libboost-system-dev', 'libboost-test-dev', 'libboost-thread-dev', 'libtool',
