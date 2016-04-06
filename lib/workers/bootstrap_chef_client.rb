@@ -12,7 +12,7 @@ module BigEarth
       def self.perform config 
         require 'bootstrap'
         begin
-          # Recipes for a generic chef-client
+          # Recipes for a generic chef client
           recipes = ['chef_client']
           
           # update the cookbooks
