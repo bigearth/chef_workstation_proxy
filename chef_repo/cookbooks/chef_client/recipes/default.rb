@@ -49,6 +49,10 @@ template '/etc/issue.net' do
   source 'issue.net.erb'
 end
 
+template '/etc/update-motd.d/00-header' do
+  source '00-header.erb'
+end
+
 template '/etc/update-motd.d/10-help-text' do
   source '10-help-text.erb'
 end
