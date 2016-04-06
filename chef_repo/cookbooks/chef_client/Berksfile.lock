@@ -1,5 +1,6 @@
 DEPENDENCIES
   apt
+  chef-server
   chef_client
     path: .
     metadata: true
@@ -10,13 +11,22 @@ DEPENDENCIES
 
 GRAPH
   apt (3.0.0)
-  chef_client (0.1.0)
+  apt-chef (1.0.0)
     apt (>= 0.0.0)
-    git (>= 0.0.0)
-    sudo (>= 0.0.0)
-    users (>= 0.0.0)
   build-essential (3.2.0)
     seven_zip (>= 0.0.0)
+  chef-ingredient (0.11.3)
+    apt-chef (>= 0.0.0)
+    yum-chef (>= 0.0.0)
+  chef-server (4.1.0)
+    chef-ingredient (>= 0.11.0)
+  chef_client (0.1.0)
+    apt (>= 0.0.0)
+    chef-server (>= 0.0.0)
+    git (>= 0.0.0)
+    oh-my-zsh (>= 0.0.0)
+    sudo (>= 0.0.0)
+    users (>= 0.0.0)
   chef_handler (1.3.0)
   compat_resource (12.9.1)
   dmg (2.3.0)
@@ -38,6 +48,8 @@ GRAPH
   windows (1.39.2)
     chef_handler (>= 0.0.0)
   yum (3.10.0)
+  yum-chef (1.0.1)
+    yum (>= 3.2)
   yum-epel (0.6.6)
     yum (~> 3.10.0)
   zsh (2.0.0)

@@ -71,6 +71,9 @@ include_recipe "sudo"
 # Set up oh-my-zsh for my sandboxed user
 include_recipe 'oh-my-zsh'
 
+# Set up chef-server
+include_recipe 'chef-server'
+
 service "ssh" do
   action [:restart]
 end
