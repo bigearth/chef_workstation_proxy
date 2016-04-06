@@ -1,6 +1,5 @@
 DEPENDENCIES
   apt
-  chef-server
   chef_client
     path: .
     metadata: true
