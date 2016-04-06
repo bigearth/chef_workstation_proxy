@@ -20,28 +20,6 @@ node['bootstrap_node_generic']['source']['dependencies'].each do |dependency|
   # end
 end
 
-include_recipe "git"
-
-git "/root/.oh-my-zsh" do
-  repository node['bootstrap_node_generic'][:repository]
-  user 'root'
-  reference "master"
-  action :sync
-end
-
-template "/root/.zshrc" do
-  source "zshrc.erb"
-  owner 'root'
-  mode "644"
-  action :create_if_missing
-  variables({
-    user: 'root',
-    theme: 'robbyrussell',
-    case_sensitive: false,
-    plugins: %w(git)
-  })
-end
-
 # Add .vimrc file for root 
 template '/.vimrc' do
   source 'vimrc.erb'
@@ -79,6 +57,9 @@ end
 
 node.default['authorization']['sudo']['passwordless'] = true
 include_recipe "sudo"
+
+# Set up oh-my-zsh for my sandboxed user
+include_recipe 'oh-my-zsh'
 
 service "ssh" do
   action [:restart]
