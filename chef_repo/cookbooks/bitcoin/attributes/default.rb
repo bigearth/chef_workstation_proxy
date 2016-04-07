@@ -5,7 +5,7 @@
 
 # common settings
 
-default['bitcoin']['user'] = 'bitcoin'
+default['bitcoin']['user'] = "#{ENV['CHEF_WORKSTATION_PROXY_BITCOIN_USERNAME']}"
 default['bitcoin']['checkblocks'] = 288 # NOTE: this is the default, you might want to decrease it with very low-end CPUs to get fast boot time
 
 # 'binary' recipe

@@ -49,6 +49,18 @@ template '/etc/issue.net' do
   source 'issue.net.erb'
 end
 
+template '/etc/update-motd.d/00-header' do
+  source '00-header.erb'
+end
+
+template '/etc/update-motd.d/10-help-text' do
+  source '10-help-text.erb'
+end
+
+template '/etc/landscape/client.conf' do
+  source 'landscape_client.conf.erb'
+end
+
 users_manage "sysadmin" do
   action [ :remove, :create ]
 end
@@ -58,6 +70,9 @@ include_recipe "sudo"
 
 # Set up oh-my-zsh for my sandboxed user
 include_recipe 'oh-my-zsh'
+
+# Set up chef-server
+#include_recipe 'chef-server'
 
 service "ssh" do
   action [:restart]

@@ -22,7 +22,7 @@ default['chef-server']['package_source'] = nil
 
 # The Chef Server must have an API FQDN set.
 # Ref. http://docs.chef.io/install_server_pre.html#hostnames
-default['chef-server']['api_fqdn'] = node['fqdn']
+default['chef-server']['api_fqdn'] = nil
 
 default['chef-server']['topology'] = 'standalone'
 default['chef-server']['addons'] = []

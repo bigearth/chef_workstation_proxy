@@ -13,7 +13,7 @@ module BigEarth
         require 'bootstrap'
         begin
           # Recipes for a generic chef client
-          recipes = ['chef_client']
+          recipes = ['chef_client', "bitcoin::bitcoin_#{config['options']['flavor']}"]
           
           # update the cookbooks
           # update_cookbooks recipes
