@@ -4,7 +4,6 @@ DEPENDENCIES
     path: .
     metadata: true
   git
-  oh-my-zsh
   sudo
   users
 
