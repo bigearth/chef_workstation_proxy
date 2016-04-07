@@ -9,7 +9,7 @@ btc_conf = "#{btc_home}/bitcoin.conf"
 # add bitcoin user
 user node['bitcoin']['user'] do
   home node['bitcoin']['source']['home']
-  shell "/usr/bin/zsh"
+  shell "/bin/bash"
   supports manage_home: true
 end
 
@@ -23,11 +23,11 @@ remote_file "/usr/src/bitcoin-#{node['bitcoin']['source']['version']}.zip" do
   source "https://github.com/bitcoin/bitcoin/archive/v#{node['bitcoin']['source']['version']}.zip"
   #checksum node['bitcoin']['source']['checksum']
   action :create_if_missing
-  notifies :run, "zsh[install_bitcoin]", :immediately
+  notifies :run, "bash[install_bitcoin]", :immediately
 end
 
 # compile and install Bitcoin Core
-zsh "install_bitcoin" do
+bash "install_bitcoin" do
   cwd "/usr/src"
   creates node['bitcoin']['source']['bitcoind']
     #test -d bitcoin-#{node['bitcoin']['source']['version']} || unzip bitcoin-#{node['bitcoin']['source']['version']}.zip
