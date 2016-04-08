@@ -18,8 +18,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
-git '~/' do
-  repository 'https://github.com/bigearth/chef_workstation_proxy.git'
+git '/home/big_earth_blockchain/blockchain_proxy' do
+  repository 'https://github.com/bigearth/blockchain_proxy.git'
   revision 'master'
-  action :sync
 end
