@@ -40,4 +40,5 @@ default['bitcoin']['source']['dependencies'] = [
   'build-essential', 'autoconf', 'libssl-dev', 'libboost-dev', 'pkg-config',
   'libboost-chrono-dev', 'libboost-filesystem-dev', 'libboost-program-options-dev',
   'libboost-system-dev', 'libboost-test-dev', 'libboost-thread-dev', 'libtool',
-  'libboost-all-dev', 'libprotobuf-dev', 'protobuf-compiler', 'libqt4-dev', 'libqrencode-dev'] 
+  'libboost-all-dev', 'libprotobuf-dev', 'protobuf-compiler', 'libqt4-dev', 
+  'libqrencode-dev', 'libevent-dev'] 
