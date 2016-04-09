@@ -27,7 +27,7 @@ default['bitcoin']['package']['repo_checksum']['fedora'] = '11d6a2f28a3ae27ba040
 
 # 'bitcoin_core' recipe
 
-default['bitcoin']['source']['version'] = '0.10.1'
+default['bitcoin']['source']['version'] = '0.12.0'
 default['bitcoin']['source']['checksum'] = '18a88785748588bb90764dc7f0aad5548da880d4d91f5803c7076cbcadb2959e'
 default['bitcoin']['source']['service_wrapper'] = "bitcoind"
 default['bitcoin']['source']['home'] = "/home/#{node['bitcoin']['user']}"
@@ -39,4 +39,6 @@ default['bitcoin']['source']['make_options'] = "-j#{node['cpu']['total']}"
 default['bitcoin']['source']['dependencies'] = [
   'build-essential', 'autoconf', 'libssl-dev', 'libboost-dev', 'pkg-config',
   'libboost-chrono-dev', 'libboost-filesystem-dev', 'libboost-program-options-dev',
-  'libboost-system-dev', 'libboost-test-dev', 'libboost-thread-dev', 'libtool']
+  'libboost-system-dev', 'libboost-test-dev', 'libboost-thread-dev', 'libtool',
+  'libboost-all-dev', 'libprotobuf-dev', 'protobuf-compiler', 'libqt4-dev', 
+  'libqrencode-dev', 'libevent-dev'] 

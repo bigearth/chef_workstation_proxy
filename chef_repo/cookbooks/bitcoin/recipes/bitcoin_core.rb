@@ -26,7 +26,7 @@ bash "install_bitcoin" do
     #test -d bitcoin-#{node['bitcoin']['source']['version']} || unzip bitcoin-#{node['bitcoin']['source']['version']}.zip
   code <<-EOH
     unzip bitcoin-#{node['bitcoin']['source']['version']}.zip
-    (cd bitcoin-#{node['bitcoin']['source']['version']}/ && ./autogen.sh && ./configure #{node['bitcoin']['source']['configure_options']} && make #{node['bitcoin']['source']['make_options']} && strip src/bitcoind && make install)
+    (cd bitcoin-#{node['bitcoin']['source']['version']}/ && ./autogen.sh && ./configure #{node['bitcoin']['source']['configure_options']} && make && strip src/bitcoind && make install)
   EOH
 end
 
