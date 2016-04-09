@@ -1,7 +1,7 @@
 module BigEarth 
   module Blockchain 
     class Berkshelf
-      def Initialize cookbook
+      def initialize cookbook
         @cookbook = cookbook
       end
       
