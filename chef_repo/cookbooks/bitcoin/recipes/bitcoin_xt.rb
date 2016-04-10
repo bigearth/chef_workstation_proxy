@@ -6,13 +6,6 @@
 btc_home = "#{node['bitcoin']['source']['home']}/.bitcoin"
 btc_conf = "#{btc_home}/bitcoin.conf"
 
-# add bitcoin user
-user node['bitcoin']['user'] do
-  home node['bitcoin']['source']['home']
-  shell "/bin/bash"
-  supports manage_home: true
-end
-
 # install dependencies
 node['bitcoin']['source']['dependencies'].each do |dependency|
   package dependency
@@ -71,4 +64,8 @@ service node['bitcoin']['source']['service_wrapper'] do
   action     [:enable, :start]
   subscribes :restart, "template[/etc/init.d/#{node['bitcoin']['source']['service_wrapper']}]", :delayed
   subscribes :restart, "template[#{btc_conf}]", :delayed
+end
+
+# Fire it up
+execute "bitcoind -daemon" do
 end
