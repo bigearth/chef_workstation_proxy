@@ -11,7 +11,6 @@ default['bitcoin']['checkblocks'] = 288 # NOTE: this is the default, you might w
 # 'bitcoin_core' recipe
 
 default['bitcoin']['source']['version'] = '0.12.0'
-default['bitcoin']['source']['checksum'] = '18a88785748588bb90764dc7f0aad5548da880d4d91f5803c7076cbcadb2959e'
 default['bitcoin']['source']['service_wrapper'] = "bitcoind"
 default['bitcoin']['source']['home'] = "/home/#{node['bitcoin']['user']}"
 default['bitcoin']['source']['prefix'] = "/usr/local"

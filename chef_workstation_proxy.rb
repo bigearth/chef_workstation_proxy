@@ -25,6 +25,7 @@ module BigEarth
       
       post '/bootstrap_infrastructure' do
         # Bootstrap Blockchains/Chef Clients, Chef Workstations and/or Chef Servers for use in the Big Earth Blockchain Platform
+        require 'bootstrap_blockchain'
         require 'bootstrap_chef_client'
         require 'bootstrap_chef_server'
         require 'bootstrap_chef_workstation'
@@ -36,6 +37,9 @@ module BigEarth
           # Bootstrap new chef client based on :options hash
           if config['type'] == 'blockchain'
             # Blockchains
+            Resque.enqueue BigEarth::Blockchain::BootstrapBlockchain, config
+          elsif config['type'] == 'chef_client'
+            # Chef Client
             Resque.enqueue BigEarth::Blockchain::BootstrapChefClient, config
           elsif config['type'] == 'chef_workstation'
             # Chef Workstations
