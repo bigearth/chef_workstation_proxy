@@ -24,9 +24,9 @@ git '/home/big_earth_blockchain/blockchain_proxy' do
 end
 
 execute 'bundle install' do
-  cwd '/blockchain_proxy'
+  cwd '/home/big_earth_blockchain/blockchain_proxy'
 end
 
 execute 'unicorn -D' do
-  cwd '/blockchain_proxy'
+  cwd '/home/big_earth_blockchain/blockchain_proxy'
 end

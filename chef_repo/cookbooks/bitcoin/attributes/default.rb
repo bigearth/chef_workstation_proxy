@@ -8,23 +8,6 @@
 default['bitcoin']['user'] = "#{ENV['CHEF_WORKSTATION_PROXY_BITCOIN_USERNAME']}"
 default['bitcoin']['checkblocks'] = 288 # NOTE: this is the default, you might want to decrease it with very low-end CPUs to get fast boot time
 
-# 'binary' recipe
-
-default['bitcoin']['binary']['home'] = "/home/#{node['bitcoin']['user']}"
-default['bitcoin']['binary']['version'] = '0.10.1'
-default['bitcoin']['binary']['checksum'] = 'c1fddf6921186c6da954a977995d45a140bc07158dced004be86ddb26d9ca54d'
-default['bitcoin']['binary']['service_wrapper'] = "bitcoind"
-default['bitcoin']['binary']['bitcoind'] = "bin/bitcoind"
-default['bitcoin']['source']['bitcoin-cli'] = node['bitcoin']['binary']['bitcoind']
-default['bitcoin']['binary']['nice_level'] = 10
-
-# 'package' recipe
-
-default['bitcoin']['package']['repo_url']['rhel'] = 'http://linux.ringingliberty.com/bitcoin/el7/x86_64/bitcoin-release-1-6.noarch.rpm'
-default['bitcoin']['package']['repo_checksum']['rhel'] = '1d3c3984d6155a504238834a27805ca93ab598a798c6bfd54625719d46aaa969'
-default['bitcoin']['package']['repo_url']['fedora'] = 'http://linux.ringingliberty.com/bitcoin/f20/x86_64/bitcoin-release-1-6.noarch.rpm'
-default['bitcoin']['package']['repo_checksum']['fedora'] = '11d6a2f28a3ae27ba040713a46ddb5b9553ea12aef7b442e9ae77a0469c3e90a'
-
 # 'bitcoin_core' recipe
 
 default['bitcoin']['source']['version'] = '0.12.0'
