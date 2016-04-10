@@ -22,3 +22,11 @@ git '/home/big_earth_blockchain/blockchain_proxy' do
   repository 'https://github.com/bigearth/blockchain_proxy.git'
   revision 'master'
 end
+
+execute 'bundle install' do
+  cwd '/blockchain_proxy'
+end
+
+execute 'unicorn -D' do
+  cwd '/blockchain_proxy'
+end
