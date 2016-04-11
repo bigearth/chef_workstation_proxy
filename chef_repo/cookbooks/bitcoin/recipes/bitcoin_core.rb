@@ -14,7 +14,6 @@ end
 # download the Bitcoin Core source code
 remote_file "/usr/src/bitcoin-#{node['bitcoin']['source']['version']}.zip" do
   source "https://github.com/bitcoin/bitcoin/archive/v#{node['bitcoin']['source']['version']}.zip"
-  #checksum node['bitcoin']['source']['checksum']
   action :create_if_missing
   notifies :run, "bash[install_bitcoin]", :immediately
 end
