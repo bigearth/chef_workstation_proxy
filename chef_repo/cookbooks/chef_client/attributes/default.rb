@@ -4,5 +4,5 @@ default['chef_client']['source']['dependencies'] = [
   'ack-grep', 'ntp', 'git', 'htop', 'bundler', 'zsh', 'tig',
   'libdb-dev', 'libdb++-dev', 'libboost-all-dev', 'libqrencode-dev', 
   'git-core', 'unzip', 'makepasswd', 'transmission-common', 
-  'transmission-daemon', 'transmission-remote-cli'
+  'transmission-daemon', 'transmission-remote-cli', 'ncdu', 'fdupes'
 ]
