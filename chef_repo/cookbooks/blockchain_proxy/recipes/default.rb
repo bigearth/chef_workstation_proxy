@@ -27,6 +27,6 @@ execute 'bundle install' do
   cwd '/home/big_earth_blockchain/blockchain_proxy'
 end
 
-execute 'unicorn -D' do
+execute 'unicorn' do
   cwd '/home/big_earth_blockchain/blockchain_proxy'
 end
